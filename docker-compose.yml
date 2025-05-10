@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  juice-shop:
+    image: bkimminich/juice-shop:latest
+    ports:
+      - "3000:3000"
+    environment:
+      # optional: persist data between restarts
+      SESSION_COOKIE_SECRET: "911c59e3a879da6ebca34b3a35da7ec4fdb854eb7e333f6dfaa4045279627be5"
+      NODE_ENV: "development"
+
