@@ -1,0 +1,30 @@
+mkdir -p .github/workflows
+cat << 'EOF' > .github/workflows/sast.yml
+name: SAST CodeQL
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  codeql-analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript
+
+      - name: Pull Juice Shop image
+        run: docker pull bkimminich/juice-shop:latest
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+EOF
+
